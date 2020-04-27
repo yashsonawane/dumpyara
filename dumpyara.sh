@@ -25,7 +25,7 @@ else
     [[ -e "$URL" ]] || { echo "Invalid Input" && exit 1; }
 fi
 
-ORG=AndroidDumps #your GitHub org name
+ORG=yashsonawane #your GitHub org name
 FILE=${URL##*/}
 EXTENSION=${URL##*.}
 UNZIP_DIR=${FILE/.$EXTENSION/}
@@ -43,7 +43,7 @@ fi
 if [[ -d "$PROJECT_DIR/Firmware_extractor" ]]; then
     git -C "$PROJECT_DIR"/Firmware_extractor pull --recurse-submodules
 else
-    git clone -q --recurse-submodules https://github.com/AndroidDumps/Firmware_extractor "$PROJECT_DIR"/Firmware_extractor
+    git clone -q --recurse-submodules https://github.com/yashsonawane/Firmware_extractor "$PROJECT_DIR"/Firmware_extractor
 fi
 if [[ ! -d "$PROJECT_DIR/extract-dtb" ]]; then
     git clone -q https://github.com/PabloCastellano/extract-dtb "$PROJECT_DIR"/extract-dtb
@@ -149,10 +149,10 @@ if [[ -n $GIT_OAUTH_TOKEN ]]; then
     curl --silent --fail "https://raw.githubusercontent.com/$ORG/$repo/$branch/all_files.txt" 2> /dev/null && echo "Firmware already dumped!" && exit 1
     git init
     if [[ -z "$(git config --get user.email)" ]]; then
-        git config user.email AndroidDumps@github.com
+        git config user.email yashsonawane@github.com
     fi
     if [[ -z "$(git config --get user.name)" ]]; then
-        git config user.name AndroidDumps
+        git config user.name yashsonawane
     fi
     git checkout -b "$branch"
     find . -size +97M -printf '%P\n' -o -name "*sensetime*" -printf '%P\n' -o -name "*.lic" -printf '%P\n' >| .gitignore
